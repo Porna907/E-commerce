@@ -55,11 +55,5 @@ export const productService = {
     return (data.results || []).map((b) => b.name);
   },
 
-  async compare(ids: string[]): Promise<Product[]> {
-    if (!ids.length) return [];
-    const { data } = await api.get<{ results: Record<string, unknown>[] }>('/products/compare/', {
-      params: { ids: ids.join(',') },
-    });
-    return (data.results || []).map((p) => normalizeProduct(p));
-  },
+  // Compare API removed
 };

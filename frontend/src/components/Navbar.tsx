@@ -16,7 +16,7 @@ export const Navbar: React.FC<{ site: SiteSettings | null }> = ({ site }) => {
   const [currency, setCurrency] = useState<'USD' | 'BDT'>(
     ((localStorage.getItem('currency') as 'USD' | 'BDT' | null) || 'USD')
   );
-  const { cart, compare, user, theme, toggleTheme, logout } = useStore();
+  const { cart, user, theme, toggleTheme, logout } = useStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -158,14 +158,7 @@ export const Navbar: React.FC<{ site: SiteSettings | null }> = ({ site }) => {
                 </span>
               )}
             </Link>
-            <Link to={`/compare?ids=${compare.map((p) => p.id).join(',')}`} className="p-2.5 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl transition-colors relative">
-              <Scale className="w-5 h-5" />
-              {compare.length > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center rounded-full">
-                  {compare.length}
-                </span>
-              )}
-            </Link>
+            {/* Compare feature removed */}
 
             {user ? (
               <div className="relative group">

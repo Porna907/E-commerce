@@ -1,23 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
-import { Product } from '../types';
-import { productService } from '../services/api/productService';
-import { useStore } from '../context/StoreContext';
-import { formatPrice } from '../utils';
-
-export const Compare = () => {
-  const [params] = useSearchParams();
-  const [rows, setRows] = useState<Product[]>([]);
-  const { compare } = useStore();
-  const ids = ((params.get('ids') || '').split(',').filter(Boolean).length ? (params.get('ids') || '').split(',').filter(Boolean) : compare.map((p) => p.id));
-
-  useEffect(() => {
-    void (async () => {
-      setRows(await productService.compare(ids));
-    })();
-  }, [params]);
-
-  if (!ids.length) {
+// Compare page removed
     return <div className="container-custom py-12">No products selected. Use compare icon from product cards.</div>;
   }
 

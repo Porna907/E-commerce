@@ -15,7 +15,6 @@ import { userService } from '../services/api/userService';
 interface StoreContextType {
   cart: CartItem[];
   wishlist: Product[];
-  compare: Product[];
   user: User | null;
   theme: 'light' | 'dark';
   cartLoaded: boolean;
@@ -26,8 +25,6 @@ interface StoreContextType {
   clearCart: () => Promise<void>;
   toggleWishlist: (product: Product) => Promise<void>;
   isInWishlist: (productId: string) => boolean;
-  toggleCompare: (product: Product) => void;
-  isInCompare: (productId: string) => boolean;
   login: (email: string, password: string, successMessage?: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
   refreshUser: () => Promise<void>;
@@ -43,10 +40,6 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [cartLoaded, setCartLoaded] = useState(false);
 
   const [wishlist, setWishlist] = useState<Product[]>([]);
-  const [compare, setCompare] = useState<Product[]>(() => {
-    const raw = localStorage.getItem('compare');
-    return raw ? JSON.parse(raw) : [];
-  });
 
   const [user, setUser] = useState<User | null>(null);
   const [userHydrated, setUserHydrated] = useState(false);
@@ -117,9 +110,6 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [theme]);
 
-  useEffect(() => {
-    localStorage.setItem('compare', JSON.stringify(compare));
-  }, [compare]);
 
   useEffect(() => {
     const onCurrencyChanged = () => setCurrencyVersion((v) => v + 1);
@@ -182,23 +172,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const isInWishlist = (productId: string) => wishlist.some((item) => item.id === productId);
-  const isInCompare = (productId: string) => compare.some((item) => item.id === productId);
 
-  const toggleCompare = (product: Product) => {
-    setCompare((prev) => {
-      const exists = prev.some((p) => p.id === product.id);
-      if (exists) {
-        toast.error('Removed from compare');
-        return prev.filter((p) => p.id !== product.id);
-      }
-      if (prev.length >= 4) {
-        toast.error('You can compare up to 4 products');
-        return prev;
-      }
-      toast.success('Added to compare');
-      return [...prev, product];
-    });
-  };
 
   const login = async (email: string, password: string, successMessage = 'Logged in successfully') => {
     const guestToken = localStorage.getItem('cart_token');
@@ -246,7 +220,6 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       value={{
         cart,
         wishlist,
-        compare,
         user,
         theme,
         cartLoaded,
@@ -257,8 +230,6 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         clearCart,
         toggleWishlist,
         isInWishlist,
-        toggleCompare,
-        isInCompare,
         login,
         register,
         refreshUser,

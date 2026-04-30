@@ -6,6 +6,7 @@ from apps.orders.views import CheckoutView, CouponPreviewView, OrderViewSet
 from apps.products.views import BrandViewSet, CategoryViewSet, HomepageSectionViewSet, ProductViewSet
 from apps.reviews.views import ProductReviewEligibilityView, ProductReviewListCreateView
 from apps.siteconfig.views import CMSPageViewSet, SiteSettingView
+
 from apps.users import urls as user_urls
 
 router = DefaultRouter()

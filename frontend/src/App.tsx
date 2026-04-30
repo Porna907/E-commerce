@@ -17,7 +17,7 @@ import { Profile } from './pages/Profile';
 import { Orders } from './pages/Orders';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { Wishlist } from './pages/Wishlist';
-import { Compare } from './pages/Compare';
+// ...existing code...
 import { ForgotPassword } from './pages/ForgotPassword';
 import { ResetPassword } from './pages/ResetPassword';
 import { Notifications } from './pages/Notifications';
@@ -47,7 +47,7 @@ export default function App() {
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/compare" element={<Compare />} />
+// ...existing code...
             <Route path="/orders" element={<Orders />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

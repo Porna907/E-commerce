@@ -16,7 +16,7 @@ import { Review } from '../types';
 export const ProductDetails = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const { addToCart, toggleWishlist, isInWishlist, toggleCompare, isInCompare } = useStore();
+  const { addToCart, toggleWishlist, isInWishlist } = useStore();
   const [product, setProduct] = useState<Product | undefined>(undefined);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [quantity, setQuantity] = useState(1);
@@ -124,7 +124,7 @@ export const ProductDetails = () => {
   }
 
   const isWishlisted = product ? isInWishlist(product.id) : false;
-  const compared = product ? isInCompare(product.id) : false;
+  // Compare feature removed
 
   const handleAddToCart = async () => {
     if (!product) return;
@@ -274,16 +274,7 @@ export const ProductDetails = () => {
               >
                 <Heart className={cn('h-4 w-4', isWishlisted && 'fill-current')} />
               </button>
-              <button
-                type="button"
-                onClick={() => product && toggleCompare(product)}
-                className={cn(
-                  'inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition-colors touch-manipulation',
-                  compared ? 'text-indigo-600' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
-                )}
-              >
-                <Scale className={cn('h-4 w-4', compared && 'fill-current')} />
-              </button>
+              {/* Compare button removed */}
             </div>
           </div>
 

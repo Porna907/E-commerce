@@ -12,11 +12,10 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { addToCart, toggleWishlist, isInWishlist, toggleCompare, isInCompare } = useStore();
+  const { addToCart, toggleWishlist, isInWishlist } = useStore();
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const isWishlisted = isInWishlist(product.id);
-  const compared = isInCompare(product.id);
 
   const handleQuickAddToCart = () => {
     void addToCart(product, quantity);
@@ -60,15 +59,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <Heart className={cn("w-4 h-4", isWishlisted && "fill-current")} />
         </button>
 
-        <button
-          onClick={() => toggleCompare(product)}
-          className={cn(
-            "absolute top-16 right-4 p-2.5 rounded-xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-sm transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0",
-            compared ? "text-indigo-600" : "text-slate-400 hover:text-indigo-600"
-          )}
-        >
-          <Scale className={cn("w-4 h-4", compared && "fill-current")} />
-        </button>
+        {/* Compare button removed */}
 
         {/* Quick View Button */}
         <button

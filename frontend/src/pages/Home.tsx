@@ -91,7 +91,7 @@ export const Home = () => {
             <img
               src={site.hero_background_image_url}
               alt=""
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-slate-950/55 to-slate-950/80 dark:from-slate-950/85 dark:via-slate-950/70 dark:to-slate-950/90" />
