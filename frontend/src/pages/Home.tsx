@@ -87,7 +87,7 @@ export const Home = () => {
       {/* Hero Section — content from Site settings */}
       <section className="relative min-h-[min(88vh,52rem)] flex items-center overflow-hidden pt-8 pb-16 md:pt-10 md:pb-20">
         {site?.hero_background_image_url ? (
-          <div className="absolute inset-0 z-0">
+         <div className="z-0 flex justify-center items-center">
             <img
               src={site.hero_background_image_url}
               alt=""
