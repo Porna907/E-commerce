@@ -11,11 +11,20 @@ export const Footer: React.FC<{ site: SiteSettings | null }> = ({ site }) => {
           {/* Brand */}
           <div className="flex flex-col gap-8">
             <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                <div className="w-5 h-5 rounded-sm border-2 border-white flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 bg-white rounded-full" />
+              {site?.logo_url ? (
+                <img
+                  src={site.logo_url}
+                  alt={site.site_name || 'Logo'}
+                  className="w-10 h-10 rounded-lg object-cover group-hover:scale-110 transition-transform"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div className="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-5 h-5 rounded-sm border-2 border-white flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 bg-white rounded-full" />
+                  </div>
                 </div>
-              </div>
+              )}
               <span className="text-2xl font-bold tracking-tighter uppercase">{site?.site_name || 'ElectroHub'}</span>
             </Link>
             <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed max-w-xs font-medium">
@@ -82,7 +91,7 @@ export const Footer: React.FC<{ site: SiteSettings | null }> = ({ site }) => {
 
         <div className="border-t border-slate-200 dark:border-slate-800 pt-12 text-center">
           <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">
-            © 2026 ElectroHub. All rights reserved.
+            © {new Date().getFullYear()} {site?.site_name || 'ElectroHub'}. All rights reserved.
           </p>
         </div>
       </div>

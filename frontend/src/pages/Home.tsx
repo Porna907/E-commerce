@@ -71,6 +71,9 @@ export const Home = () => {
   const heroBadge = site?.hero_badge_text?.trim() || 'Next Gen Technology';
   const heroTitle = site?.hero_title?.trim() || 'The Future';
   const heroHighlight = site?.hero_title_highlight?.trim() || 'of Innovation.';
+  const heroHighlightParts = heroHighlight.split(/\s+/).filter(Boolean);
+  const heroHighlightFirst = heroHighlightParts[0] || 'of';
+  const heroHighlightRest = heroHighlightParts.slice(1).join(' ') || 'Innovation.';
   const heroDesc =
     site?.hero_description?.trim() ||
     'Experience the next evolution of gadgets. Precision engineered, beautifully designed, and built for the modern world.';
@@ -85,121 +88,90 @@ export const Home = () => {
   return (
     <div className="flex flex-col pb-20">
       {/* Hero Section — content from Site settings */}
-      <section className="relative min-h-[min(88vh,52rem)] flex items-center overflow-hidden pt-8 pb-16 md:pt-10 md:pb-20">
-        {site?.hero_background_image_url ? (
-         <div className="z-0 flex justify-center items-center">
+      <section className="relative min-h-[min(92vh,56rem)] overflow-hidden bg-[#050B1A] pt-10 pb-16 md:pt-14 md:pb-20">
+        <div className="absolute inset-0 z-0">
+          {site?.hero_image_url || site?.hero_background_image_url ? (
             <img
-              src={site.hero_background_image_url}
+              src={site?.hero_background_image_url || site?.hero_image_url || ''}
               alt=""
-              className="h-full w-full object-contain"
+              className="h-full w-full object-cover opacity-100 brightness-110 contrast-[1.05] saturate-[1.05]"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-slate-950/55 to-slate-950/80 dark:from-slate-950/85 dark:via-slate-950/70 dark:to-slate-950/90" />
-          </div>
-        ) : (
-          <div className="absolute inset-0 z-0">
-            <div className="absolute top-[-10%] right-[-10%] h-[50%] w-[50%] rounded-full bg-brand-500/10 blur-[120px] animate-pulse" />
-            <div className="absolute bottom-[-10%] left-[-10%] h-[30%] w-[30%] rounded-full bg-indigo-500/10 blur-[100px]" />
-          </div>
-        )}
+          ) : null}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050B1A]/90 via-[#050B1A]/55 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050B1A]/15 via-transparent to-[#050B1A]/80" />
+          <div className="absolute -left-24 top-24 h-[340px] w-[340px] rounded-full bg-brand-600/25 blur-[110px]" />
+          <div className="absolute -right-28 top-8 h-[420px] w-[420px] rounded-full bg-indigo-500/15 blur-[140px]" />
+        </div>
 
-        <div className="container-custom relative z-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="container-custom relative z-10 flex min-h-[min(92vh,56rem)] items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="order-1"
+            className="w-full max-w-2xl lg:pt-6"
           >
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-3 py-1 dark:border-brand-800/50 dark:bg-brand-900/20 md:mb-8"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur md:mb-8"
             >
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-500" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-300">
                 {heroBadge}
               </span>
             </motion.div>
 
-            <h1 className="mb-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-              {heroTitle} <br />
-              <span className="bg-gradient-to-r from-brand-600 to-indigo-500 bg-clip-text text-transparent">
-                {heroHighlight}
+            <h1 className="mb-6 text-5xl font-extrabold leading-[0.98] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl">
+              {heroTitle}
+              <br />
+              <span className="block bg-gradient-to-r from-brand-500 to-indigo-400 bg-clip-text text-transparent">
+                {heroHighlightFirst}
+              </span>
+              <span className="block bg-gradient-to-r from-brand-500 to-indigo-400 bg-clip-text text-transparent">
+                {heroHighlightRest}
               </span>
             </h1>
 
-            <p className="mb-8 max-w-lg text-base font-medium leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg md:mb-10">
+            <p className="mb-8 max-w-lg text-base font-medium leading-relaxed text-slate-200/80 sm:text-lg md:mb-10">
               {heroDesc}
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <StorefrontCta
                 href={site?.hero_cta_primary_url || '/products'}
-                className="group btn-primary inline-flex min-h-[3rem] w-full items-center justify-center gap-3 px-6 py-3.5 text-center sm:w-auto sm:min-w-[12rem]"
+                className="group inline-flex min-h-[3rem] w-full items-center justify-center gap-3 rounded-xl bg-brand-600 px-7 py-3.5 text-center text-[11px] font-extrabold uppercase tracking-[0.15em] text-white shadow-[0_18px_40px_rgba(37,99,235,0.35)] transition-transform hover:scale-[1.02] active:scale-[0.98] sm:w-auto sm:min-w-[14rem]"
               >
                 {(site?.hero_cta_primary_label || 'Shop Collection').trim()}
                 <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" />
               </StorefrontCta>
               <StorefrontCta
                 href={site?.hero_cta_secondary_url || '/products'}
-                className="btn-secondary inline-flex min-h-[3rem] w-full items-center justify-center px-6 py-3.5 text-center sm:w-auto sm:min-w-[12rem]"
+                className="inline-flex min-h-[3rem] w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 px-7 py-3.5 text-center text-[11px] font-extrabold uppercase tracking-[0.15em] text-white backdrop-blur transition-colors hover:bg-white/10 sm:w-auto sm:min-w-[14rem]"
               >
                 {(site?.hero_cta_secondary_label || 'Explore Categories').trim()}
               </StorefrontCta>
             </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: 'easeOut' }}
-            className="relative order-2 mt-4 w-full lg:mt-0"
-          >
-            <div className="relative z-10 overflow-hidden rounded-3xl border border-white/20 shadow-2xl shadow-brand-500/20">
-              <img
-                src={site?.hero_image_url || 'https://picsum.photos/seed/techhero/1200/1200'}
-                alt="Hero"
-                className="aspect-[4/3] w-full object-cover sm:aspect-square lg:aspect-auto lg:min-h-[22rem]"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            <div className="absolute -right-4 -top-8 hidden h-28 w-28 items-center justify-center rounded-2xl bg-white shadow-xl dark:bg-slate-900 sm:flex lg:-right-10 lg:-top-10 lg:h-32 lg:w-32">
-              <Zap className="h-8 w-8 text-brand-600 lg:h-10 lg:w-10" />
-            </div>
-            <div className="absolute -bottom-6 -left-2 hidden rounded-2xl border border-slate-100 bg-white p-5 shadow-xl dark:border-slate-800 dark:bg-slate-900 sm:block lg:-bottom-10 lg:-left-10 lg:p-6">
-              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Active Users</p>
-              <p className="text-2xl font-bold text-brand-600">850+</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="bg-slate-50/50 py-16 dark:bg-slate-900/20 md:py-24">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {[
-              { icon: Truck, title: 'Free Shipping', desc: 'On orders over $500' },
-              { icon: Shield, title: 'Secure Payment', desc: '100% secure payment' },
-              { icon: RotateCcw, title: 'Easy Returns', desc: '30-day return policy' },
-              { icon: Headphones, title: '24/7 Support', desc: 'Dedicated support team' },
-            ].map((feature, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="group card-modern p-6 md:p-8"
-              >
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 shadow-sm transition-transform group-hover:scale-110 dark:bg-brand-900/20">
-                  <feature.icon className="h-5 w-5 text-brand-600" />
+            <div className="mt-10 grid grid-cols-2 gap-6 md:mt-12 md:grid-cols-4 md:gap-8">
+              {[
+                { icon: Truck, title: 'Free Delivery', desc: 'On all orders' },
+                { icon: Shield, title: '1 Year Warranty', desc: 'Peace of mind' },
+                { icon: RotateCcw, title: '30 Days Return', desc: 'Hassle free returns' },
+                { icon: Headphones, title: 'Secure Payment', desc: '100% protected' },
+              ].map((f) => (
+                <div key={f.title} className="flex items-start gap-3 text-white/90">
+                  <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 backdrop-blur">
+                    <f.icon className="h-5 w-5 text-brand-200" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-extrabold tracking-tight">{f.title}</p>
+                    <p className="text-[11px] font-medium text-slate-200/70">{f.desc}</p>
+                  </div>
                 </div>
-                <h3 className="mb-2 text-base font-bold">{feature.title}</h3>
-                <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">{feature.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
