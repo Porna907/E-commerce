@@ -20,7 +20,8 @@ python manage.py migrate
 python manage.py seed_demo
 ```
 
-4. Create an admin user (email-based accounts):
+4. Create an admin user (email-based a
+ccounts):
 
 ```bash
 python manage.py createsuperuser
