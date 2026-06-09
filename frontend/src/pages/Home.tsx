@@ -92,7 +92,7 @@ export const Home = () => {
         <div className="absolute inset-0 z-0">
           {site?.hero_image_url || site?.hero_background_image_url ? (
             <img
-              src={site?.hero_background_image_url || site?.hero_image_url || ''}
+              src={site?.hero_background_image_url || site?.hero_image_url}
               alt=""
               className="h-full w-full object-cover opacity-100 brightness-110 contrast-[1.05] saturate-[1.05]"
               referrerPolicy="no-referrer"
@@ -300,7 +300,8 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Newsletter Section */}
+      {/*
+      Newsletter Section
       <section className="container-custom py-20 md:py-32">
         <div className="relative overflow-hidden rounded-[2rem] border border-slate-100 bg-slate-50 p-10 text-center dark:border-slate-800 dark:bg-slate-900/40 md:rounded-[3rem] md:p-24">
           <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-50" />
@@ -319,6 +320,7 @@ export const Home = () => {
           </form>
         </div>
       </section>
+      */}
     </div>
   );
 };

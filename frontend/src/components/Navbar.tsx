@@ -163,7 +163,7 @@ export const Navbar: React.FC<{ site: SiteSettings | null }> = ({ site }) => {
             {user ? (
               <div className="relative group">
                 <button className="flex items-center gap-3 p-1 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl transition-colors">
-                  <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-800 object-cover" />
+                  <img src={user.avatar || undefined} alt={user.name} className="w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-800 object-cover" />
                 </button>
                 <div className="absolute right-0 top-full mt-2 w-64 glass-panel rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all py-3 overflow-hidden">
                   <div className="px-4 py-3 border-b border-slate-200/50 dark:border-slate-800/50 mb-2">

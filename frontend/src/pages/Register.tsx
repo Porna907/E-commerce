@@ -111,10 +111,11 @@ export const Register = () => {
             <div className="w-full border-t border-slate-100 dark:border-slate-800/50"></div>
           </div>
           <div className="relative flex justify-center text-[10px] font-bold uppercase tracking-[0.2em]">
-            <span className="bg-white dark:bg-slate-900 px-8 text-slate-400">Or sign up with</span>
+            {/* <span className="bg-white dark:bg-slate-900 px-8 text-slate-400">Or sign up with</span> */}
           </div>
         </div>
 
+        {/*
         <div className="grid grid-cols-2 gap-6">
           <button className="flex items-center justify-center gap-4 py-5 bg-slate-50 dark:bg-slate-800 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-[11px] font-bold uppercase tracking-[0.15em] border border-slate-100 dark:border-slate-800 shadow-sm">
             <Chrome className="w-5 h-5" /> Google
@@ -123,6 +124,7 @@ export const Register = () => {
             <Github className="w-5 h-5" /> GitHub
           </button>
         </div>
+        */}
 
         <p className="text-center text-[11px] font-bold uppercase tracking-[0.15em] text-slate-500 mt-10 sm:mt-16">
           Already have an account? <Link to="/login" className="text-brand-600 hover:text-brand-700 hover:underline underline-offset-4">Login</Link>

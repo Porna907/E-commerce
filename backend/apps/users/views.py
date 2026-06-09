@@ -7,7 +7,7 @@ from rest_framework import generics, permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView as SimpleJWTTokenRefreshView
 
 from .models import Notification, User, WishlistItem
 from .serializers import (
@@ -24,6 +24,7 @@ from apps.siteconfig.services import send_dynamic_email
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
+    authentication_classes = []
     permission_classes = (permissions.AllowAny,)
     serializer_class = RegisterSerializer
 
@@ -56,6 +57,8 @@ class MeView(generics.RetrieveUpdateAPIView):
 
 
 class EmailTokenObtainPairView(TokenObtainPairView):
+    authentication_classes = []
+    permission_classes = (permissions.AllowAny,)
     serializer_class = EmailTokenObtainPairSerializer
 
     def post(self, request, *args, **kwargs):
@@ -68,6 +71,11 @@ class EmailTokenObtainPairView(TokenObtainPairView):
             "user": UserPublicSerializer(user, context={"request": request}).data,
         }
         return Response(data)
+
+
+class RefreshTokenView(SimpleJWTTokenRefreshView):
+    authentication_classes = []
+    permission_classes = (permissions.AllowAny,)
 
 
 class LogoutView(APIView):
@@ -89,6 +97,7 @@ class ChangePasswordView(APIView):
 
 
 class ForgotPasswordView(APIView):
+    authentication_classes = []
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
@@ -110,6 +119,7 @@ class ForgotPasswordView(APIView):
 
 
 class ResetPasswordView(APIView):
+    authentication_classes = []
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
@@ -176,6 +186,7 @@ class NotificationViewSet(viewsets.GenericViewSet):
 
 
 class GoogleLoginView(APIView):
+    authentication_classes = []
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):

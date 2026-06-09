@@ -105,6 +105,7 @@ export const Login = () => {
           </button>
         </form>
 
+        {/*
         <div className="relative my-10 sm:my-16">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-slate-100 dark:border-slate-800/50"></div>
@@ -113,12 +114,15 @@ export const Login = () => {
             <span className="bg-white dark:bg-slate-900 px-8 text-slate-400">Or continue with</span>
           </div>
         </div>
+        */}
 
+        {/*
         <div className="grid grid-cols-1 gap-6">
           <button type="button" onClick={() => void handleGoogle()} className="flex items-center justify-center gap-4 py-5 bg-slate-50 dark:bg-slate-800 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-[11px] font-bold uppercase tracking-[0.15em] border border-slate-100 dark:border-slate-800 shadow-sm">
             <Chrome className="w-5 h-5" /> Google
           </button>
         </div>
+        */}
 
         <p className="text-center text-[11px] font-bold uppercase tracking-[0.15em] text-slate-500 mt-10 sm:mt-16">
           Don't have an account? <Link to="/register" className="text-brand-600 hover:text-brand-700 hover:underline underline-offset-4">Sign up</Link>
