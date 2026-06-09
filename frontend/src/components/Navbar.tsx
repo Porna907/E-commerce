@@ -71,7 +71,7 @@ export const Navbar: React.FC<{ site: SiteSettings | null }> = ({ site }) => {
               </div>
             )}
             <span className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-              {(site?.site_name || 'ELECTROHUB').toUpperCase()}
+              {(site?.site_name || 'TECHNEST').toUpperCase()}
             </span>
           </Link>
 
